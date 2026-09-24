@@ -56,7 +56,7 @@ export function verifyJwt(token: string, secret: string): JwtPayload | null {
 export function hashPassword(password: string): string {
   const salt = crypto.randomBytes(16).toString("hex");
   const hash = crypto.scryptSync(password, salt, 64, { N: 16384, r: 8, p: 1 }).toString("hex");
-  return `scrypt$v1$N16384$r8$p1${salt}${hash}`;
+  return ["scrypt", "v1", "N16384", "r8", "p1", salt, hash].join("$");
 }
 
 export function verifyPassword(password: string, stored: string): boolean {
