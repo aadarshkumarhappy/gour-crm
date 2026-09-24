@@ -137,8 +137,8 @@ export function mutate(fn: (db: Db) => void): Db {
 /* ------------------------- seeding ------------------------- */
 
 function seed(): Db {
-  const adminUser = (process.env.GOUR_ADMIN_USERNAME || "admin").trim();
-  const adminPass = process.env.GOUR_ADMIN_PASSWORD || "admin";
+  const adminUser = (process.env.GOUR_ADMIN_USERNAME || "admin@gour.io").trim();
+  const adminPass = process.env.GOUR_ADMIN_PASSWORD || "System@123321";
   const now = new Date().toISOString();
   return {
     meta: { secret: crypto.randomBytes(32).toString("hex"), seededAt: now },

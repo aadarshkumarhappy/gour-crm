@@ -48,7 +48,7 @@ export default function LoginPage() {
               onChange={(e) => setUsername(e.target.value)}
               autoComplete="username"
               className="mt-1 w-full rounded-lg border border-slate-600 bg-slate-800 px-3.5 py-2.5 text-sm text-slate-100 placeholder-slate-500 outline-none focus:border-indigo-400 focus:ring-2 focus:ring-indigo-500/30"
-              placeholder="admin"
+              placeholder="admin@gour.io"
             />
           </div>
           <div>
@@ -82,6 +82,9 @@ export default function LoginPage() {
         </form>
 
         <p className="mt-5 text-center text-[11px] leading-relaxed text-slate-500">
+          Default sign-in: <span className="text-slate-400 font-medium">admin@gour.io</span> · <span className="text-slate-400 font-medium">System@123321</span>
+        </p>
+        <p className="mt-2 text-center text-[11px] leading-relaxed text-slate-500">
           Secured with JWT sessions · {new Date().getFullYear()}
         </p>
       </div>
