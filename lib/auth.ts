@@ -56,15 +56,16 @@ export function verifyJwt(token: string, secret: string): JwtPayload | null {
 export function hashPassword(password: string): string {
   const salt = crypto.randomBytes(16).toString("hex");
   const hash = crypto.scryptSync(password, salt, 64, { N: 16384, r: 8, p: 1 }).toString("hex");
-  return `scrypt$v1$N16384$r8$p1$N${salt}$N${hash}`;
+  return `scrypt$v1$N16384$r8$p1${salt}${hash}`;
 }
 
 export function verifyPassword(password: string, stored: string): boolean {
   try {
     const parts = stored.split("$");
     if (parts.length !== 7 || parts[0] !== "scrypt") return false;
-    const salt = parts[5];
-    const expected = parts[6];
+    // Historical records stored salt/hash with a leading "N" — tolerate it.
+    const salt = parts[5].startsWith("N") ? parts[5].slice(1) : parts[5];
+    const expected = parts[6].startsWith("N") ? parts[6].slice(1) : parts[6];
     const actual = crypto.scryptSync(password, salt, 64, { N: 16384, r: 8, p: 1 }).toString("hex");
     return crypto.timingSafeEqual(Buffer.from(actual), Buffer.from(expected));
   } catch {
