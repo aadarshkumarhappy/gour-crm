@@ -1,7 +1,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import crypto from "node:crypto";
-import { hashPassword, signJwt, verifyJwt } from "@/lib/auth";
+import { hashPassword, signJwt, verifyJwt, verifyPassword } from "@/lib/auth";
 
 /* ------------------------------------------------------------------
  * Lightweight JSON file store. Data lives in /workspace/data/db.json.
