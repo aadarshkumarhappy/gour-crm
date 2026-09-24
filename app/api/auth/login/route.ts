@@ -15,7 +15,8 @@ export async function POST(req: Request) {
     }
     const user = username.trim();
     return NextResponse.json({ token, username: user });
-  } catch {
+  } catch (e) {
+    console.error("[login]", e);
     return NextResponse.json({ error: "Invalid request body." }, { status: 400 });
   }
 }
